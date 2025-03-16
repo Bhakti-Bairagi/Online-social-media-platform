@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Social Media Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+          <!-- Logo or Brand Name -->
+          <a href="#" class="navbar-logo">CREATO</a>
+        </div>
+
+        <input type="text" placeholder="Search..." id="search-bar" onkeyup="searchPosts()">
+
+    
+          <!-- Hamburger Menu for Mobile -->
+          <div class="navbar-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+    
+          <!-- Navbar Links -->
+        
+          <ul class="navbar-menu">
+            <li class="navbar-item">
+              <a href="index.html" class="navbar-link">Home</a>
+            </li>
+            <li class="navbar-item">
+              <a href="Feed.html" class="navbar-link">Feed</a>
+            </li>
+            <li class="navbar-item">
+              <a href="Profile.html" class="navbar-link">Profile</a>
+            </li>
+            <li class="navbar-item">
+              <a href="signup.html" class="navbar-link">Logout</a>
+            </li>
+            <li class="navbar-item">
+              <a href="https://github.com/Bhakti-Bairagi" class="navbar-link" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </li>
+            <li class="navbar-item">
+              <a href="https://www.linkedin.com/in/bhakti-bairagi-49a6332b2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="navbar-link" target="_blank">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </li>
+          </ul>
+      </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+<!-- Sidebar -->
+<div class="sidebar1">
+  <h1>CREATO</h1>
+  <h4>The Social Media App for "Creative Ones"</h4>
+</div>
+
+        <!-- Feed -->
+        <main class="feed">
+            <div class="post-box">
+                <textarea id="post-input" placeholder="Write your story..."></textarea>
+                <input type="file" id="image-input" accept="image/*">
+                <button onclick="addPost()">Post</button>
+            </div>
+            <div id="feed"></div>
+        </main>
+
+         <!-- Homepage Content -->
+    <div class="home-container">
+      <h1>Welcome to CREATO</h1>
+      <p>Connect, share, and explore posts from other users.</p>
+      <a href="feed.html" class="explore-btn">Explore Now</a>
+  </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
