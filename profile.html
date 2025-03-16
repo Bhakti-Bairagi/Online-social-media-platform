@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=DM+Sans:400,500|Jost:400,500,600&display=swap");
+
+
+        
+* {
+box-sizing: border-box;
+}
+
+body {
+margin-top: 80px;
+color: #2b2c48;
+font-family: 'Jost', sans-serif;
+background-color: #2b2c48;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+display: flex;
+flex-wrap: wrap;
+
+padding: 0px;
+}
+
+.card {
+
+max-width: 500px;
+margin: auto;
+overflow-y: auto;
+position: relative;
+z-index: 1;
+overflow-x: hidden;
+background-color: rgb(255, 255, 255);
+display: flex;
+transition: 0.3s;
+flex-direction: column;
+border-radius: 10px;
+box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.card[data-state="#about"] {
+height: 450px;
+}
+
+.card[data-state="#about"] .card-main {
+padding-top: 0;
+}
+
+.card[data-state="contact"] {
+height: 445px;
+}
+
+.card[data-state="#experience"] {
+height: 565px;
+}
+
+.card.is-active .card-header {
+height: 80px;
+}
+
+.card.is-active .card-cover {
+height: 100px;
+top: -50px;
+}
+
+.card.is-active .card-avatar {
+transform: none;
+left: 20px;
+width: 50px;
+height: 50px;
+bottom: 10px;
+}
+
+.card.is-active .card-fullname,
+.card.is-active .card-jobtitle {
+left: 86px;
+transform: none;
+}
+
+.card.is-active .card-fullname {
+bottom: 18px;
+font-size: 19px;
+}
+
+.card.is-active .card-jobtitle {
+bottom: 16px;
+letter-spacing: 1px;
+font-size: 10px;
+}
+
+.card-header {
+position: relative;
+display: flex;
+height: 200px;
+flex-shrink: 0;
+width: 100%;
+transition: 0.3s;
+}
+
+.card-header * {
+transition: 0.3s;
+}
+
+.card-cover {
+width: 100%;
+height: 100%;
+position: absolute;
+height: 160px;
+top: -20%;
+left: 0;
+will-change: top;
+background-size: cover;
+background-position: center;
+filter: blur(30px);
+transform: scale(1.2);
+transition: 0.5s;
+}
+
+.card-avatar {
+width: 100px;
+height: 100px;
+box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+border-radius: 50%;
+-o-object-position: center;
+object-position: center;
+-o-object-fit: cover;
+object-fit: cover;
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%) translateY(-64px);
+}
+
+.card-fullname {
+position: absolute;
+bottom: 0;
+font-size: 22px;
+font-weight: 700;
+text-align: center;
+white-space: nowrap;
+transform: translateY(-10px) translateX(-50%);
+left: 50%;
+}
+
+.card-jobtitle {
+position: absolute;
+bottom: 0;
+font-size: 11px;
+white-space: nowrap;
+font-weight: 500;
+opacity: 0.7;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+margin: 0;
+left: 50%;
+transform: translateX(-50%) translateY(-7px);
+}
+
+.card-main {
+position: relative;
+flex: 1;
+display: flex;
+padding-top: 10px;
+flex-direction: column;
+}
+
+.card-subtitle {
+font-weight: 700;
+font-size: 13px;
+margin-bottom: 8px;
+}
+
+.card-content {
+padding: 20px;
+}
+
+.card-desc {
+line-height: 1.6;
+font-size: 14px;
+color: #636b6f;
+margin: 0;
+font-weight: 400;
+font-family: 'DM Sans', sans-serif;
+}
+
+.card-social {
+display: flex;
+align-items: center;
+padding: 0 20px;
+margin-bottom: 30px;
+}
+
+.card-social svg {
+fill: rgb(135, 181, 206);
+width: 16px;
+display: block;
+transition: 0.3s;
+}
+
+.card-social a {
+color: #8797a1;
+height: 32px;
+width: 32px;
+border-radius: 50%;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+transform: 0.3s;
+background-color: rgba(93, 133, 193, 0.05);
+border-radius: 50%;
+margin-right: 10px;
+}
+
+.card-social a:hover svg {
+fill: #637faa;
+}
+
+.card-social a:last-child {
+margin-right: 0;
+}
+
+.card-timeline {
+margin-top: 30px;
+position: relative;
+}
+
+.card-timeline:after {
+background: linear-gradient(to top,
+rgba(134, 214, 243, 0) 0%,
+rgb(81, 106, 204) 100%);
+content: '';
+left: 42px;
+width: 2px;
+top: 0;
+height: 100%;
+position: absolute;
+}
+
+.card-item {
+position: relative;
+padding-left: 60px;
+padding-right: 20px;
+padding-bottom: 30px;
+z-index: 1;
+}
+
+.card-item:last-child {
+padding-bottom: 5px;
+}
+
+.card-item:after {
+content: attr(data-year);
+width: 10px;
+position: absolute;
+top: 0;
+left: 37px;
+width: 8px;
+height: 8px;
+line-height: 0.6;
+border: 2px solid #fff;
+font-size: 11px;
+text-indent: -35px;
+border-radius: 50%;
+color: rgba(134, 134, 134, 0.7);
+background: linear-gradient(to bottom, #a0aee3 0%, #516acc 100%);
+}
+
+.card-item-title {
+font-weight: 500;
+font-size: 14px;
+margin-bottom: 5px;
+}
+
+.card-item-desc {
+font-size: 13px;
+color: #6f6f7b;
+line-height: 1.5;
+font-family: 'DM Sans', sans-serif;
+}
+
+.card-section {
+display: none;
+}
+
+.card-section.is-active {
+display: block;
+animation: fadeIn 0.6s both;
+}
+
+.card-buttons {
+display: flex;
+background-color: #fff;
+margin-top: auto;
+position: sticky;
+bottom: 0;
+left: 0;
+}
+
+.card-buttons button {
+flex: 1 1 auto;
+-webkit-user-select: none;
+-moz-user-select: none;
+user-select: none;
+background: 0;
+font-size: 13px;
+border: 0;
+padding: 15px 5px;
+cursor: pointer;
+color: #5c5c6d;
+transition: 0.3s;
+font-family: 'Jost', sans-serif;
+font-weight: 500;
+outline: 0;
+border-bottom: 3px solid transparent;
+}
+
+.card-buttons button.is-active,
+.card-buttons button:hover {
+color: #2b2c48;
+border-bottom: 3px solid #8a84ff;
+background: linear-gradient(to bottom, rgba(127, 199, 231, 0) 0%,
+rgba(207, 204, 255, 0.2) 44%,
+rgba(211, 226, 255, 0.4) 100%);
+}
+
+@keyframes fadeIn {
+0% {
+opacity: 0;
+transform: translate(40px);
+}
+
+100% {
+opacity: 1;
+}
+}
+
+.card-contact-wrapper {
+margin-top: 20px;
+}
+
+.card-contact {
+display: flex;
+align-items: center;
+font-size: 13px;
+color: #6f6f7b;
+font-family: 'DM Sans', sans-serif;
+cursor: pointer;
+}
+
+.card-contact+.card-contact {
+margin-top: 16px;
+}
+
+.card-contact svg {
+flex-shrink: 0;
+width: 30px;
+min-height: 34px;
+margin-right: 12px;
+transition: 0.3s;
+padding-right: 12px;
+border-right: 1px solid #dfe2ec;
+}
+
+
+/* Add these additional styles for editable fields and upload button */
+.editable-field {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    font-family: 'Jost', sans-serif;
+    font-size: inherit;
+    color: inherit;
+    background: transparent;
+    cursor: text;
+}
+
+.editable-field:focus {
+    border-color: #8a84ff;
+    background: rgba(138, 132, 255, 0.1);
+}
+
+.upload-btn-wrapper {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+}
+
+.upload-btn {
+    background-color: #8a84ff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    /* cursor: pointer; */
+    font-size: 12px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+    background-color: #6c63ff;
+}
+
+#upload-input {
+    display: none;
+}
+
+.save-btn {
+    border: 2px solid #8a84ff;
+    color: #8a84ff;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.save-btn:hover {
+    background-color: #8a84ff;
+    color: white;
+}
+
+    </style>
+  
+</head>
+
+<body>
+    
+    <div class="card" data-state="#about">
+        <div class="card-header">
+            <div class="card-cover" id="profile-cover"
+                 style="background-image: url('vecteezy_illustration-of-no-image-available-icon-template-for-no_8015799.jpg')">
+            </div>
+            <img class="card-avatar" id="profile-avatar"
+                src=""
+                alt="avatar" />
+            <div class="upload-btn-wrapper">
+                <button class="upload-btn">Upload Image</button>
+                <input type="file" id="upload-input" accept="image/*" />
+            </div>
+            <h1 class="card-fullname editable-field" contenteditable="true">@username </h1>
+        </div>
+        <div class="card-main">
+            <div class="card-section is-active" id="about">
+                <div class="card-content">
+                    <div class="card-subtitle">ABOUT</div>
+                    <p class="card-desc editable-field" contenteditable="true">Whatever tattooed stumptown art party
+                        sriracha gentrify hashtag intelligentsia readymade schlitz brooklyn disrupt.</p>
+                </div>
+                <div class="card-social">
+                    <!-- Social media icons here -->
+                </div>
+            </div>
+           
+            <div class="card-section" id="contact">
+                <div class="card-content">
+                    <div class="card-subtitle">CONTACT</div>
+                    <div class="card-contact-wrapper">
+                        <div class="card-contact">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span class="editable-field" contenteditable="true">Algonquin Rd, Three Oaks Vintage, MI, 49128</span>
+                        </div>
+                        <div class="card-contact">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                            </svg>
+                            <span class="editable-field" contenteditable="true">(269) 756-9809</span>
+                        </div>
+                        <div class="card-contact">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <path d="M22 6l-10 7L2 6" />
+                            </svg>
+                            <span class="editable-field" contenteditable="true">AcademyNet.net@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-buttons">
+                <button data-section="#about" class="is-active">ABOUT</button>
+                <button data-section="#contact">CONTACT</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+      
+        const buttons = document.querySelectorAll('.card-buttons button');
+        const sections = document.querySelectorAll('.card-section');
+        const card = document.querySelector('.card');
+        const uploadInput = document.getElementById('upload-input');
+        const profileAvatar = document.getElementById('profile-avatar');
+        const profileCover = document.getElementById('profile-cover');
+        
+        // Handle button clicks for section switching
+        const handleButtonClick = (e) => {
+        const targetSection = e.target.getAttribute("data-section");
+        const section = document.querySelector(targetSection);
+        
+        targetSection !== "#about"
+           ? card.classList.add("is-active")
+           : card.classList.remove("is-active");
+        
+        card.setAttribute("data-state", targetSection);
+        
+        sections.forEach((s) => s.classList.remove("is-active"));
+        buttons.forEach((b) => b.classList.remove("is-active"));
+        
+        e.target.classList.add("is-active");
+        section.classList.add("is-active");
+        };
+        
+        buttons.forEach((btn) => {
+        btn.addEventListener('click', handleButtonClick);
+        });
+        
+        // Manually trigger file input when clicking "Upload Image" button
+        document.querySelector('.upload-btn').addEventListener('click', () => {
+        uploadInput.click();
+        });
+        
+        // Handle image upload
+        uploadInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+           const reader = new FileReader();
+           reader.onload = (e) => {
+               const imageData = e.target.result; // Base64 data
+               profileAvatar.src = imageData;
+               profileCover.style.backgroundImage = `url(${imageData})`;
+           };
+           reader.readAsDataURL(file);
+        }
+        });
+        
+        // Save profile data to localStorage
+        const saveProfile = () => {
+        const profileData = {
+           name: document.querySelector('.card-fullname').innerText,
+           about: document.querySelector('.card-desc').innerText,
+           address: document.querySelectorAll('.card-contact .editable-field')[0].innerText,
+           phone: document.querySelectorAll('.card-contact .editable-field')[1].innerText,
+           email: document.querySelectorAll('.card-contact .editable-field')[2].innerText,
+           avatar: profileAvatar.src || "", // Store as Base64
+           cover: profileCover.style.backgroundImage.replace('url("', '').replace('")', '') || ""
+        };
+        
+        localStorage.setItem('profileData', JSON.stringify(profileData));
+        alert("Profile saved!");
+        };
+        
+        
+        // Load profile data from localStorage
+        const loadProfile = () => {
+        const savedData = localStorage.getItem('profileData');
+        if (savedData) {
+           const profileData = JSON.parse(savedData);
+           document.querySelector('.card-fullname').innerText = profileData.name;
+           document.querySelector('.card-desc').innerText = profileData.about;
+           
+           let contactFields = document.querySelectorAll('.card-contact .editable-field');
+           contactFields[0].innerText = profileData.address;
+           contactFields[1].innerText = profileData.phone;
+           contactFields[2].innerText = profileData.email;
+        
+           if (profileData.avatar) profileAvatar.src = profileData.avatar;
+           if (profileData.cover) profileCover.style.backgroundImage = `url(${profileData.cover})`;
+        }
+        };
+        
+        // Load profile on page load
+        window.addEventListener('load', loadProfile);
+        
+        
+        // Add a save button inside `.card-main`
+        const saveButton = document.createElement('button');
+        saveButton.className = 'save-btn';
+        saveButton.innerText = 'Save Profile';
+        saveButton.addEventListener('click', saveProfile);
+        document.querySelector('.card-main').appendChild(saveButton);
+        
+        // Load profile on page load
+        window.addEventListener('load', loadProfile);
+        
+        
+            </script>
+
+</body>
+
+</html>

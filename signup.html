@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - CREATO</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to CREATO</h2>
+        <p>Create your account</p>
+        <form id="signupForm">
+            <input type="text" id="fullname" placeholder="Full Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <button class="glow-button">Sign Up</button>
+            <p>Already have an account? <a href="login.html" >Login</a></p>
+        </form>
+        <p id="error-message"></p>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>
